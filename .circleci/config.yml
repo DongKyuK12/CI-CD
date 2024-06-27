@@ -9,4 +9,11 @@ workflows:
   build:
     jobs:
       - cypress/run: # "run" job comes from "cypress" orb
+          node-version: "18.17.0" # 필요한 Node.js 버전 지정
           start-command: "npm run start"
+          pre-steps:
+            - node/install:
+                node-version: "18.17.0" # 필요한 Node.js 버전 설치
+            - run:
+                name: Check Node.js version
+                command: node --version
