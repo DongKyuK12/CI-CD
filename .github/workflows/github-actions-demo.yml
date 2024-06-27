@@ -1,7 +1,12 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+
 on: [push]
 jobs:
+  main:
+    strategy:
+      matrix:
+        node-version: ["18.x", "20.x"]
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
@@ -16,3 +21,5 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+      - run: npm test
+      - run: npm run build
