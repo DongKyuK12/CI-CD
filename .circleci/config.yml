@@ -1,27 +1,8 @@
 version: 2.1
-
 orbs:
   cypress: cypress-io/cypress@3
-
-jobs:
-  cypress-run:
-    docker:
-      - image: cimg/base:stable # 기본 CircleCI 이미지 사용
-    steps:
-      - checkout
-      - run:
-          name: Install specific Node version
-          command: |
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 18.17.0
-            nvm use 18.17.0
-            node --version
-      - cypress/install
-      - cypress/run:
-          start-command: "npm run start"
-
 workflows:
   build:
     jobs:
-      - cypress-run
+      - cypress/run:
+          start-command: "npm run start"
